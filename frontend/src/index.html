@@ -1,200 +1,64 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jarvis Platform</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            height: 100vh;
-            overflow: hidden;
-        }
-        .container {
-            display: flex;
-            height: 100vh;
-            padding: 20px;
-            gap: 20px;
-        }
-        .panel {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-        }
-        .input-panel {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        .visualization-panel {
-            flex: 2;
-            display: flex;
-            flex-direction: column;
-        }
-        .output-panel {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        .smart-input {
-            flex: 1;
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #e1e5e9;
-            border-radius: 10px;
-            font-size: 16px;
-            resize: none;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-        .smart-input:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-        .process-visualizer {
-            flex: 1;
-            background: #f8f9fa;
-            border-radius: 10px;
-            border: 2px dashed #dee2e6;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #6c757d;
-            font-size: 18px;
-        }
-        .artifact-display {
-            flex: 1;
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 15px;
-            overflow-y: auto;
-            border: 2px solid #e1e5e9;
-        }
-        .highlight {
-            background-color: #fff3cd;
-            padding: 2px 4px;
-            border-radius: 3px;
-        }
-        .button {
-            background: #667eea;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: 10px;
-            transition: background 0.3s ease;
-        }
-        .button:hover {
-            background: #5a6fd8;
-        }
-        .button:disabled {
-            background: #6c757d;
-            cursor: not-allowed;
-        }
-        h2 {
-            color: #495057;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
+        body { font-family: Arial; margin: 0; padding: 20px; background: #f0f0f0; }
+        .container { display: flex; gap: 20px; height: 90vh; }
+        .panel { background: white; padding: 20px; border-radius: 10px; flex: 1; }
+        textarea { width: 100%; height: 200px; margin-bottom: 10px; }
+        button { padding: 10px 20px; background: #007acc; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        .process { background: #e3f2fd; padding: 10px; margin: 5px 0; border-radius: 5px; }
     </style>
 </head>
 <body>
+    <h1>🤖 Jarvis Platform</h1>
     <div class="container">
-        <!-- Left Panel - Input -->
-        <div class="panel input-panel">
-            <h2>🤖 Jarvis Input</h2>
-            <textarea 
-                id="smartInput" 
-                class="smart-input" 
-                placeholder="Начните вводить запрос... (например: 'Создай словарь машинных инструкций')"
-            ></textarea>
-            <button id="processButton" class="button">Обработать запрос</button>
+        <div class="panel">
+            <h3>Ввод</h3>
+            <textarea id="input" placeholder="Введите ваш запрос...">Создай словарь машинных инструкций</textarea>
+            <button onclick="processInput()">Обработать</button>
         </div>
-
-        <!-- Center Panel - Visualization -->
-        <div class="panel visualization-panel">
-            <h2>🔄 MIG Processes Visualization</h2>
-            <div id="processVisualizer" class="process-visualizer">
-                MIG процессы будут отображаться здесь...
-            </div>
+        <div class="panel">
+            <h3>MIG Процессы</h3>
+            <div id="processes"></div>
         </div>
-
-        <!-- Right Panel - Output -->
-        <div class="panel output-panel">
-            <h2>📁 Результаты</h2>
-            <div id="artifactDisplay" class="artifact-display">
-                Результаты появятся здесь...
-            </div>
+        <div class="panel">
+            <h3>Результат</h3>
+            <div id="result"></div>
         </div>
     </div>
 
     <script>
-        // Basic input handling with placeholder for smart features
-        const smartInput = document.getElementById('smartInput');
-        const processButton = document.getElementById('processButton');
-        const artifactDisplay = document.getElementById('artifactDisplay');
-        const processVisualizer = document.getElementById('processVisualizer');
-
-        smartInput.addEventListener('input', function() {
-            // Placeholder for intelligent input processing
-            console.log('User typing:', this.value);
+        async function processInput() {
+            const input = document.getElementById('input').value;
+            const resultDiv = document.getElementById('result');
+            const processesDiv = document.getElementById('processes');
             
-            // Simple highlight simulation
-            if (this.value.includes('словарь')) {
-                artifactDisplay.innerHTML = '<p>🔍 Обнаружен запрос на создание словаря...</p>';
-            }
-        });
-
-        processButton.addEventListener('click', async function() {
-            const input = smartInput.value.trim();
-            if (!input) return;
-
-            processButton.disabled = true;
-            processButton.textContent = 'Обработка...';
-
+            resultDiv.innerHTML = '🔄 Обработка...';
+            processesDiv.innerHTML = '<div class="process">Intent Analysis...</div>';
+            
             try {
-                // Simulate MIG process visualization
-                processVisualizer.innerHTML = 
-                    <div style="text-align: left; width: 100%; padding: 20px;">
-                        <p>🚀 Создание MIG процессов...</p>
-                        <p>✅ Intent Classification</p>
-                        <p>✅ Execution Planning</p>
-                        <p>🔄 Code Generation</p>
-                        <p>⏳ Text Processing</p>
-                    </div>
-                ;
-
-                // Send to backend (placeholder)
-                const result = await window.jarvisAPI.processInput(input);
-                
-                // Display results
-                artifactDisplay.innerHTML = 
-                    <h3>✅ Запрос обработан</h3>
-                    <p><strong>Результат:</strong> </p>
-                    <button class="button" onclick="downloadArtifact()">📥 Скачать результат</button>
-                ;
-
+                const response = await window.jarvisAPI.processInput(input);
+                if (response.success) {
+                    resultDiv.innerHTML = '<strong>✅ Результат:</strong><br>' + response.data.result;
+                    
+                    // Show MIG processes
+                    processesDiv.innerHTML = '';
+                    response.data.migProcesses.forEach(proc => {
+                        processesDiv.innerHTML += '<div class="process">' + proc.name + ' - ' + proc.status + '</div>';
+                    });
+                } else {
+                    resultDiv.innerHTML = '❌ Ошибка: ' + response.error;
+                }
             } catch (error) {
-                artifactDisplay.innerHTML = <p style="color: red;">❌ Ошибка: </p>;
-            } finally {
-                processButton.disabled = false;
-                processButton.textContent = 'Обработать запрос';
+                resultDiv.innerHTML = '❌ Ошибка связи: ' + error.message;
             }
-        });
-
-        function downloadArtifact() {
-            // Placeholder for file download functionality
-            alert('Функция скачивания будет реализована в следующей версии');
         }
-
-        // Initialize with sample text for testing
-        smartInput.value = "Создай словарь машинных инструкций с переводом на соответствующие человеческие слова";
+        
+        // Auto-test on load
+        setTimeout(processInput, 1000);
     </script>
 </body>
 </html>

@@ -1,0 +1,9 @@
+C:\Jarvis-Platform\backend\target\debug\deps\rand_chacha-ba7732af7ede1844.d: C:\Users\usuario\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rand_chacha-0.3.1\src\lib.rs C:\Users\usuario\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rand_chacha-0.3.1\src\chacha.rs C:\Users\usuario\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rand_chacha-0.3.1\src\guts.rs
+
+C:\Jarvis-Platform\backend\target\debug\deps\librand_chacha-ba7732af7ede1844.rlib: C:\Users\usuario\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rand_chacha-0.3.1\src\lib.rs C:\Users\usuario\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rand_chacha-0.3.1\src\chacha.rs C:\Users\usuario\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rand_chacha-0.3.1\src\guts.rs
+
+C:\Jarvis-Platform\backend\target\debug\deps\librand_chacha-ba7732af7ede1844.rmeta: C:\Users\usuario\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rand_chacha-0.3.1\src\lib.rs C:\Users\usuario\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rand_chacha-0.3.1\src\chacha.rs C:\Users\usuario\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rand_chacha-0.3.1\src\guts.rs
+
+C:\Users\usuario\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rand_chacha-0.3.1\src\lib.rs:
+C:\Users\usuario\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rand_chacha-0.3.1\src\chacha.rs:
+C:\Users\usuario\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rand_chacha-0.3.1\src\guts.rs:
