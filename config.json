@@ -1,0 +1,19 @@
+﻿{
+    "project_name": "Jarvis-Platform",
+    "version": "0.1.0",
+    "models": {
+        "deepseek_coder_1.3b": {
+            "path": "models/deepseek-coder-1.3b-base.Q3_K_S.gguf",
+            "type": "code_generation",
+            "context_size": 2048
+        }
+    },
+    "runtime": {
+        "max_concurrent_mig_processes": 3,
+        "auto_snapshot_interval_sec": 300
+    },
+    "storage": {
+        "artifacts_path": "storage/artifacts",
+        "snapshots_path": "storage/snapshots"
+    }
+}

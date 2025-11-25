@@ -1,0 +1,18 @@
+﻿[package]
+name = "jarvis-backend"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+tokio = { version = "1.0", features = ["full"] }
+tonic = "0.10"
+prost = "0.12"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+uuid = { version = "1.0", features = ["v4"] }
+rayon = "1.7"
+log = "0.4"
+env_logger = "0.10"
+
+[build-dependencies]
+tonic-build = "0.10"
